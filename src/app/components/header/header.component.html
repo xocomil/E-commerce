@@ -1,4 +1,24 @@
-<header class="headerStyles">
+<header
+  class="headerStyles"
+  fxLayout="row"
+  fxLayoutGap="10px"
+  fxLayoutAlign="space-between"
+>
   <img src="../assets/CompanyLogo.png" class="imageSize" /><img />
-  <button mat-raised-button>Basic</button>
+  <section>
+    <button mat-raised-button [matMenuTriggerFor]="menu">
+      {{ buttonText }}<mat-icon>arrow_drop_down</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button
+        (click)="onSelect(option)"
+        *ngFor="let option of APICategories$ | async"
+        mat-menu-item
+      >
+        {{ option }}
+      </button>
+    </mat-menu>
+  </section>
+
+  <section>CART</section>
 </header>

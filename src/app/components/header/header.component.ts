@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BehaviorSubject, map, Subject, tap } from 'rxjs';
-
+import { BehaviorSubject, Subject, tap } from 'rxjs';
 import { Product } from 'src/Interfaces/main';
 import { ProductsService } from 'src/services/products.service';
 
@@ -11,15 +10,24 @@ import { ProductsService } from 'src/services/products.service';
 })
 export class HeaderComponent implements OnInit {
   constructor(private productsService: ProductsService) {}
-  //behavioral or subject
-
+  APICategories$ = new BehaviorSubject<string[]>(['All Categories']);
   products$ = new Subject<Product[]>();
-  titles$ = new Subject<any>();
+
+  buttonText = 'All Categories';
+
+  onSelect(category: string) {
+    this.buttonText = category;
+  }
 
   ngOnInit(): void {
-    this.products$.subscribe();
     this.productsService.getGenericProducts().subscribe((data) => {
       this.products$.next(data);
     });
+
+    this.productsService.getCategories().subscribe((data) => {
+      this.APICategories$.next(data);
+    });
   }
 }
+
+//this.Category_Options.push(data);

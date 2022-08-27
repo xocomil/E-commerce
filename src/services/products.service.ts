@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, tap } from 'rxjs';
+import { Observable, of, tap } from 'rxjs';
 import { Product } from 'src/Interfaces/main';
 
 @Injectable({
@@ -23,19 +23,18 @@ export class ProductsService {
 
   getCategories(): Observable<string[]> {
     // highlighted producs
-    const res = this.http
-      .get<string[]>('https://fakestoreapi.com/products/categories')
-      .pipe(tap((e) => console.log(e)));
+    const res = this.http.get<string[]>(
+      'https://fakestoreapi.com/products/categories'
+    );
     return res;
   }
 
   getSpecificCategoryProducts(productCategory: string): Observable<Product[]> {
     //specific products , p
-    const res = this.http
-      .get<Product[]>(
-        `https://fakestoreapi.com/products/category/${productCategory}`
-      )
-      .pipe(tap((e) => console.log(e)));
+    const res = this.http.get<Product[]>(
+      `https://fakestoreapi.com/products/category/${productCategory}`
+    );
+
     return res;
   }
 }
