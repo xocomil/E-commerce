@@ -13,6 +13,9 @@ export class HeaderComponent implements OnInit {
   APICategories$ = new BehaviorSubject<string[]>(['All Categories']);
   products$ = new Subject<Product[]>();
 
+  //The idea is to have a Behavior Subject with "All Categories" and to have the api call to get the rest of the categories.
+  //Add on top of that observable so we have a select that has all the values. The All categories, and the other values that we get thru the api call.
+
   buttonText = 'All Categories';
 
   onSelect(category: string) {
